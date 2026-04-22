@@ -92,7 +92,7 @@ const banners = [
   },
 ]
 
-const AUTO_PLAY_INTERVAL = 5000
+const AUTO_PLAY_INTERVAL = 10000
 
 export default function BannerCarousel() {
   const [current, setCurrent]   = useState(0)
