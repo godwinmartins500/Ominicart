@@ -38,7 +38,7 @@ export default function Header() {
         {/* Logo */}
         <div className="logo">
           <div className="logo-box">O</div>
-          <span className="logo-text">OmniCart</span>
+          <span className="logo-text">OminiCart</span>
         </div>
 
         {/* Navigation */}

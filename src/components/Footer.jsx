@@ -48,7 +48,7 @@ export default function Footer() {
         <div className="footer-brand">
           <a href="/" className="footer-logo">
             <div className="footer-logo-box">O</div>
-            <span className="footer-logo-text">OmniCart</span>
+            <span className="footer-logo-text">OminiCart</span>
           </a>
           <p className="footer-tagline">
             Your all‑in‑one marketplace for food, homes, wheels, and everything in between.
@@ -137,7 +137,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <span className="footer-copy">
-          © {new Date().getFullYear()} <span>OmniCart</span>. All rights reserved.
+          © {new Date().getFullYear()} <span>OminiCart</span>. All rights reserved.
         </span>
         <div className="footer-legal">
           <a href="/privacy">Privacy Policy</a>
