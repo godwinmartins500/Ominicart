@@ -7,7 +7,7 @@ import {
   MdOutdoorGrill, MdHouse, MdDirectionsCar,
   MdKitchen, MdElectricBolt, MdCheckroom
 } from 'react-icons/md'
-import './BannerCarousel.css'
+import './Bannercarousel.css'
 
 const banners = [
   {

@@ -4,7 +4,7 @@ import {
   MdOutdoorGrill, MdHouse, MdDirectionsCar,
   MdKitchen, MdElectricBolt, MdCheckroom
 } from 'react-icons/md'
-import './CategoryStrip.css'
+import './Categorystrip.css'
 
 const categories = [
   {

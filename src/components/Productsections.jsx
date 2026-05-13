@@ -1,10 +1,11 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { GiMeat, GiPlantRoots } from 'react-icons/gi'
 import {
   MdOutdoorGrill, MdHouse, MdDirectionsCar,
   MdKitchen, MdElectricBolt, MdCheckroom, MdAddShoppingCart
 } from 'react-icons/md'
-import './ProductSections.css'
+import './Productsections.css'
+import ItemModal from './ItemModal'
 
 /* ─────────────────────────────────────────────
    Category meta (colours/icons match CategoryStrip)
@@ -227,9 +228,9 @@ function Stars({ rating }) {
 /* ─────────────────────────────────────────────
    Single Product Card
 ───────────────────────────────────────────── */
-function ProductCard({ item, catStyle }) {
+function ProductCard({ item, catStyle, onItemClick }) {
   return (
-    <div className="ps-card" style={catStyle}>
+    <div className="ps-card" style={catStyle} onClick={() => onItemClick(item)}>
       <div className="ps-img-wrap">
         <img
           src={item.img}
@@ -246,7 +247,7 @@ function ProductCard({ item, catStyle }) {
         <Stars rating={item.rating} />
         <div className="ps-card-footer">
           <span className="ps-card-price">{item.price}</span>
-          <button className="ps-card-btn" title="Add to cart">
+          <button className="ps-card-btn" title="Add to cart" onClick={(e) => e.stopPropagation()}>
             <MdAddShoppingCart size={14} />
           </button>
         </div>
@@ -258,7 +259,7 @@ function ProductCard({ item, catStyle }) {
 /* ─────────────────────────────────────────────
    Single Category Section (drag-to-scroll)
 ───────────────────────────────────────────── */
-function CategorySection({ section }) {
+function CategorySection({ section, onItemClick }) {
   const meta    = CATEGORY_META[section.category]
   const Icon    = meta.icon
   const trackRef = useRef(null)
@@ -330,7 +331,7 @@ function CategorySection({ section }) {
           onMouseMove={onMouseMove}
         >
           {section.items.map(item => (
-            <ProductCard key={item.id} item={item} catStyle={meta.style} />
+            <ProductCard key={item.id} item={item} catStyle={meta.style} onItemClick={onItemClick} />
           ))}
         </div>
       </div>
@@ -342,11 +343,32 @@ function CategorySection({ section }) {
    Main Export
 ───────────────────────────────────────────── */
 export default function ProductSections() {
+  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedCategory, setSelectedCategory] = useState(null)
+
+  const handleItemClick = (item, category) => {
+    setSelectedItem(item)
+    setSelectedCategory(category)
+  }
+
   return (
-    <div className="product-sections">
-      {SECTIONS.map(section => (
-        <CategorySection key={section.category} section={section} />
-      ))}
-    </div>
+    <>
+      <div className="product-sections">
+        {SECTIONS.map(section => (
+          <CategorySection
+            key={section.category}
+            section={section}
+            onItemClick={(item) => handleItemClick(item, section)}
+          />
+        ))}
+      </div>
+      <ItemModal
+        item={selectedItem}
+        isOpen={!!selectedItem}
+        onClose={() => setSelectedItem(null)}
+        similarItems={selectedCategory?.items || []}
+        category={selectedCategory?.category}
+      />
+    </>
   )
 }
